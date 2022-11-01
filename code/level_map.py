@@ -7,7 +7,7 @@ map = [
 '          XXXXXX      XXX',
 '                         ',
 '   XXXXXX         XXXX   ',
-'                         ', 
+'          W              ', 
 'XXXXXXXXXXXXXXXXXXXXXXXX ',
 'XXXXXXXXXXXXXXXXXXXXXXXX ']
 

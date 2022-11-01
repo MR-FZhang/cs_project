@@ -8,7 +8,7 @@ pygame.init()
 size = (screen_width, screen_height)
 screen = pygame.display.set_mode(size)
 clock = pygame.time.Clock()
-FPS = 60
+FPS = 60            
 # creates an instance of the level
 level = Level(map,screen)
 # setting up game loop
