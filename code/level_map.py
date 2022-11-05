@@ -1,13 +1,13 @@
 # constructing a bacis map layout
 map = [
 '                         ',
-'                         ',
+'                  H      ',
 '                XXXXX    ',            
-'                         ',
+'          E            H ',
 '          XXXXXX      XXX',
-'                         ',
+'   E  H           E      ',
 '   XXXXXX         XXXX   ',
-'          W              ', 
+'          P              ', 
 'XXXXXXXXXXXXXXXXXXXXXXXX ',
 'XXXXXXXXXXXXXXXXXXXXXXXX ']
 
