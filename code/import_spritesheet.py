@@ -24,7 +24,6 @@ class Spritesheet:
     for x in range (num_pic):
       sprite = self.data['frames'][f'{name}{x}.png']['frame']
       x, y, w, h = sprite['x'], sprite['y'], sprite['w'], sprite['h']
-      print (x, y, w, h)
       image = self.get_sprite(x, y, w, h)
       sprite_list.append(image)
     return sprite_list

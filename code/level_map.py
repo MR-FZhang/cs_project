@@ -8,11 +8,12 @@ map = [
 '   E  H           E      ',
 '   XXXXXX         XXXX   ',
 '          P              ', 
-'XXXXXXXXXXXXXXXXXXXXXXXX ',
-'XXXXXXXXXXXXXXXXXXXXXXXX ']
+'XXXXXXXXXXXXXXXXXXXXXXXXX',
+'XXXXXXXXXXXXXXXXXXXXXXXXX']
 
 #useful constants
 sprite_size = 60
 screen_width = 1000
 #get the accurate height for the screen
 screen_height = len(map)*sprite_size
+print(len(map[0]))
