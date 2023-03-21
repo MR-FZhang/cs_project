@@ -29,7 +29,8 @@ class troll_enemies(pygame.sprite.Sprite):
     self.death_frame_index = 0
     self.attack_cooldown = 0
     self.enemy = 'troll'
-    self.attack_sound = pygame.mixer.Sound('./audio/enemy_attacking.wav')
+    self.attack_sound_1 = pygame.mixer.Sound('./audio/enemy_attacking.wav')
+    self.sound_cooldown = 0
   def get_visions(self):
     
     if self.facing_right == True:
@@ -76,8 +77,8 @@ class troll_enemies(pygame.sprite.Sprite):
         self.attaking = False
         self.attack_cooldown = 10
         
-      if player.rect.colliderect(attacking_rect):
-          self.attack_sound.play()
+      if player.rect.colliderect(attacking_rect) and player.health > 0 and self.attacking == True:
+          self.attack_sound()
           player.health -= 50
 
     else :
@@ -97,6 +98,13 @@ class troll_enemies(pygame.sprite.Sprite):
       
       return animations_list[self.status]
  
+  def attack_sound(self):
+      
+      if self.sound_cooldown <= 0:
+        self.attack_sound_1.play()
+        self.sound_cooldown = 1
+      else:
+        self.sound_cooldown -= 1
   def get_status(self):
     if self.moving:
       self.status = 'walk'
@@ -106,7 +114,6 @@ class troll_enemies(pygame.sprite.Sprite):
     
     if self.attacking and self.attack_cooldown == 0 and not self.moving: 
       self.status = 'ultimate'    
-    
     if self.health <= 0:
       self.status = 'death'
   
@@ -149,6 +156,7 @@ class troll_enemies(pygame.sprite.Sprite):
   def attack(self):
     self.attacking = True
     self.status == 'ultimate'
+    
   def draw(self,screen, camera_pos):
     screen.blit(self.image, (self.rect.x - camera_pos.x, self.rect.y - camera_pos.y))
   

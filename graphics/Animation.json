@@ -106,10 +106,10 @@
 },
 "Death3.png":
 {
-	"frame": {"x":1,"y":26,"w":120,"h":25},
+	"frame": {"x":1,"y":26,"w":34,"h":25},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":21,"y":49,"w":120,"h":25},
+	"spriteSourceSize": {"x":21,"y":49,"w":34,"h":25},
 	"sourceSize": {"w":120,"h":80}
 },
 "Death4.png":

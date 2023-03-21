@@ -133,6 +133,7 @@ class Level():
           player.rect.top = sprite.rect.bottom
           player.direction.y = 0
           player.on_ceiling = True
+    
     if player.on_ground and player.direction.y < 0 or player.direction.y > 1:
       player.on_ground = False
     if player.on_ceiling and player.direction.y > 0.1:
@@ -146,16 +147,15 @@ class Level():
       
     if self.player.rect.right > self.camera_pos.x + screen_width - self.screen_bond:
       self.camera_pos.x = self.player.rect.right - screen_width + self.screen_bond
-      
-    # When the player's y is smaller than 0 but is falling, there would be an error if you set the camera to position to 0
     # because there is a gap for the player to travel before it can reach 0, so glitches would be seen
+    # When the player's y is smaller than 0 but is falling, there would be an error if you set the camera to position to 0
     if self.player.rect.top < self.camera_pos.y:
       self.camera_pos.y = self.player.rect.top 
     elif self.player.rect.top < 0 and self.player.rect.top > self.camera_pos.y :
       self.camera_pos.y = self.player.rect.top
     elif self.player.rect.top >= 0:
       self.camera_pos.y = 0
-
+# because there is a gap for the player to travel before it can reach 0, so glitches would be seen
   def run(self):
       #getting the current camera position
       self.bg_scroll -= self.screen_scroll

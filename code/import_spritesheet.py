@@ -31,3 +31,6 @@ class Spritesheet:
       enlarged_img = pygame.transform.scale(image, ((w * 2), (h * 2))).convert_alpha()
       self.sprite_list.append(enlarged_img)
     return self.sprite_list
+
+
+    

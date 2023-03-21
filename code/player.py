@@ -11,8 +11,8 @@ class Player(pygame.sprite.Sprite):
     self.speed = 12
     self.direction = pygame.math.Vector2(0,0)
     self.gravity = 1.6
-    self.jump_speed = -21
-    self.health = 999999
+    self.jump_speed = - 29
+    self.health = 999999999999999999
     self.max_health = self.health
     self.frame_index = 0
     self.frame_time = 0.4
@@ -39,7 +39,7 @@ class Player(pygame.sprite.Sprite):
     
     player_actions = {'idle':[],'run':[],'jump':[],'fall':[],'attack':[], 'death':[]}
     sprite_sheet = Spritesheet('./graphics/Animation')
-    sprite_sheet_1 = Spritesheet('./graphics/Animation1')
+   
     player_actions['idle'] = sprite_sheet.get_spritelist('Idle', 10)
     player_actions['run'] = sprite_sheet.get_spritelist('Run', 10)
     player_actions['jump'] = sprite_sheet.get_spritelist('Jump', 3)
@@ -116,9 +116,7 @@ class Player(pygame.sprite.Sprite):
     colour = (0, 0, 0)
     img = font.render(f'SCORE:{self.score}', True, colour)
     self.display_surface.blit(img, (x, y))
-  
 
-  
   def death_animations (self, position):
 
     if self.status == 'death'and self.on_ground == True:
@@ -130,12 +128,6 @@ class Player(pygame.sprite.Sprite):
         
         self.rect = self.image.get_rect(midbottom = self.rect.midbottom)
       
-      if self.frame_index >= 50:
-        self.health = 999999
-        self.speed = 15
-        self.status = 'idle'
-        self.rect = self.image.get_rect(topleft = position)
-        self.score = 0
       else:
         self.image = self.animations_list[len(self.animations_list) - 1]
         

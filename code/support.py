@@ -21,8 +21,6 @@ def import_folder(path):
       
       full_path = path + '/' + image
       image_surf = pygame.image.load(full_path).convert_alpha()
-      #if path == '/Users/fuchunzhang/Documents/cs_project/graphics/diamonds' or '/Users/fuchunzhang/Documents/cs_project/graphics/coins':
-        #image_surf = pygame.transform.scale(image_surf, ((width * 2), (height * 2)))
       surface_list.append(image_surf)
   
   return surface_list

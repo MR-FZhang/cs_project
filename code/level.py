@@ -11,7 +11,6 @@ from player import Player
 # initialieses instances of all other classes, used to check for interactions between all elements.
 class Level:
   def __init__(self, level_data, surface):
-    # sound effects
 
     # general setup
     self.display_surface = surface
@@ -24,7 +23,7 @@ class Level:
     # goal set up
     self.goal_group = pygame.sprite.GroupSingle()
     # attributes to determine the posittions of the camera and boundery conditions
-    self.screen_bond = 200
+    self.screen_bond = 350
     self.camera_pos = pygame.math.Vector2(0, 0)
     self.screen_bond_height = 25 
     # determines positions to where the images should be blitted on to the screen
@@ -67,10 +66,8 @@ class Level:
     
   # iterates through a CSV file for a game setup to determine the postions for drawing an sprite on the screen.
   def create_tile_group(self,layout, type):
-    
     # when ever the functions is called, a sprite group is established to contain sprites
     sprite_group = pygame.sprite.Group()
-    
     # loops through a fill and determine the value that is contained in a cell of a CSV
     for row_index, row in enumerate(layout):
       for col_index, val in enumerate(row):
@@ -80,9 +77,7 @@ class Level:
           if type == 'terrain':
             # gets a list of slices graphics for a passed in spritesheet
             terrain_tile_list = import_cut_graph('./graphics/terrain/terrain_layout.png', tile_size, tile_size)
-            # targets a specific sprite
             tile_surface = terrain_tile_list[int(val)]
-            # determines the kind of sprite is should be
             sprite = StaticTile(tile_size, tile_size, x, y, tile_surface)
 
           if type == 'bridges':
@@ -105,16 +100,15 @@ class Level:
             sprite = potions(39, 51, x, y, './graphics/potions')      
           
           if type == 'enemies' and val == '0':
-            sprite = troll_enemies(x, y, 1, './graphics/Troll_animations')
+            sprite = troll_enemies(x, y, 2.5, './graphics/Troll_animations')
 
           if type == 'enemies' and val == '1':
-            sprite = mech_enemies(x, y, 2, './graphics/Enemy_Animations')
+            sprite = mech_enemies(x, y, 2.5, './graphics/Enemy_Animations')
 
           if type == 'constraints':
             sprite = Tile(tile_size, tile_size, x ,y)
           
           sprite_group.add(sprite)
-    # returns the sprite ground
     return sprite_group
   
   # allws the enemy to move in a specified boundary
@@ -260,13 +254,13 @@ class Level:
       player.on_right = False
       self.collided = False
     # the sequence of the prrogramme determines the order of excution, therefore it is vital to place variables in the correct order
-    if (player.rect.right > self.camera_pos.x + screen_width - 200 and self.bg_scroll < (120 * tile_size) \
-      - screen_width) or (player.rect.x < self.camera_pos.x + 220 and self.bg_scroll > abs(player.speed)):
+    if (player.rect.right > self.camera_pos.x + screen_width - self.screen_bond and self.bg_scroll < (120 * tile_size) \
+      - screen_width) or (player.rect.x < self.camera_pos.x + self.screen_bond and self.bg_scroll > abs(player.speed)):
       
       if player.speed > 0 and player.direction.x > 0 and not self.collided:
         self.bg_scroll += player.speed
 
-      elif player.direction.x < 0 and player.rect.x < self.camera_pos.x + 215 and not self.collided:
+      elif player.direction.x < 0 and player.rect.x < self.camera_pos.x + self.screen_bond and not self.collided:
         self.bg_scroll -= player.speed
         
       else:
@@ -319,7 +313,7 @@ class Level:
     # background initialisation
     self.draw_bg()
     self.camera_update()
-    
+    print(self.player.status)
     # diplaying the bg_trees
     for bg_trees in self.bg_trees_sprites:
       bg_trees.draw(self.display_surface, self.camera_pos)
@@ -397,10 +391,10 @@ class Pick_up(pygame.sprite.Sprite):
       
       def health_pick_up_collesion(self):
         
-        group = pygame.sprite.spritecollide(self.player, self.health_pick_up_grp, True)
-        if group:  
+        potion_group = pygame.sprite.spritecollide(self.player, self.health_pick_up_grp, True)
+        if potion_group:  
           self.potion_sound.play()
-          for pick_up in group:
+          for pick_up in potion_group:
               self.player.score += 50
               self.player.health += 50
               if self.player.health > self.player.max_health:
